@@ -5,7 +5,7 @@
 %bcond_with	static
 %bcond_without	strict
 
-Summary:	Library for accessing USB devices
+Summary:	Matroska library for mediastreamer
 Name:		bcmatroska2
 Version:	5.2.1
 Release:	1
@@ -20,8 +20,7 @@ BuildRequires:	ninja
 BuildRequires:	cmake(bctoolbox)
 
 %description
-Utilities library used by Belledonne Communications
-softwares like belle-sip, mediastreamer2 and linphone.
+Bcmatroska2 is an implementation of Matroska for mediastreamer.
 
 #---------------------------------------------------------------------------
 
