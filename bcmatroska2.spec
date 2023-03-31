@@ -8,7 +8,7 @@
 Summary:	Matroska library for mediastreamer
 Name:		bcmatroska2
 Version:	5.2.1
-Release:	1
+Release:	2
 License:	BSD and Zlib and GPLv2+
 Group:		System/Libraries
 Url:		https://www.linphone.org
