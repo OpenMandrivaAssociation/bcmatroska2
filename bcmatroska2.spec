@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+
 %define major	0
 %define libname %mklibname %{name}
 %define devname %mklibname %{name} -d
@@ -13,8 +15,7 @@ License:	BSD and Zlib and GPLv2+
 Group:		System/Libraries
 Url:		https://www.linphone.org
 Source0:	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.bz2
-Patch0:		bcmatroska2-5.2.1_fix-cmake-dir.patch
-Patch1:		bcmatroska2-5.2.1_fix-linking.patch
+Patch0:		bcmatroska2-5.3.5_fix-cmake-dir.patch
 BuildRequires:	cmake
 BuildRequires:	ninja
 BuildRequires:	cmake(bctoolbox)
@@ -48,8 +49,8 @@ This package includes the development files for %{name}.
 
 %files -n %{devname}
 %{_libdir}/lib%{name}.so
-%{_libdir}/cmake/%{name}/
 %{_includedir}/%{name}/
+%{_datadir}/cmake/BCMatroska2/
 
 #---------------------------------------------------------------------------
 
