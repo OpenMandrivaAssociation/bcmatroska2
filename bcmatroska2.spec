@@ -9,7 +9,7 @@
 
 Summary:	Matroska library for mediastreamer
 Name:		bcmatroska2
-Version:	5.3.5
+Version:	5.3.13
 Release:	1
 License:	BSD and Zlib and GPLv2+
 Group:		System/Libraries
