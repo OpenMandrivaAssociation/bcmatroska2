@@ -4,13 +4,16 @@
 %define libname %mklibname %{name}
 %define devname %mklibname %{name} -d
 
+# exclude unwanted cmake requires
+%global __provides_exclude_from ^%{_datadir}/cmake/.*/Find.*cmake$
+
 %bcond_with	static
 %bcond_without	strict
 
 Summary:	Matroska library for mediastreamer
 Name:		bcmatroska2
 Version:	5.3.13
-Release:	1
+Release:	2
 License:	BSD and Zlib and GPLv2+
 Group:		System/Libraries
 Url:		https://www.linphone.org
