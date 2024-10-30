@@ -7,12 +7,13 @@
 # exclude unwanted cmake requires
 %global __provides_exclude_from ^%{_datadir}/cmake/.*/Find.*cmake$
 
-%bcond_with	static
-%bcond_without	strict
+%bcond strict			1
+%bcond unit_tests		1
+%bcond unit_tests_install	0
 
 Summary:	Matroska library for mediastreamer
 Name:		bcmatroska2
-Version:	5.3.93
+Version:	5.3.94
 Release:	1
 License:	BSD and Zlib and GPLv2+
 Group:		System/Libraries
@@ -25,6 +26,12 @@ BuildRequires:	cmake(bctoolbox)
 
 %description
 Bcmatroska2 is an implementation of Matroska for mediastreamer.
+
+%if %{with unit_tests} && %{with unit_tests_install}
+%files
+%{_bindir}/%{name}-tester
+%{_datadir}/%{name}-tester/
+%endif
 
 #---------------------------------------------------------------------------
 
@@ -61,14 +68,27 @@ This package includes the development files for %{name}.
 %autosetup -p1
 
 %build
+
 %cmake \
-	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
 	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
-	-DCMAKE_SKIP_RPATH:BOOL=YES \
+	-DENABLE_UNIT_TESTS:BOOL=%{?with_unit_tests:ON}%{?!with_unit_tests:OFF} \
 	-DCMAKE_INSTALL_INCLUDEDIR:PATH=include/%{name} \
 	-G Ninja
 %ninja_build
 
 %install
 %ninja_install -C build
+
+# don't install unit tester
+%if %{with unit_tests} && ! %{with unit_tests_install}
+rm -f  %{buildroot}%{_bindir}/%{name}-tester
+rm -fr %{buildroot}%{_datadir}/%{name}-tester/
+%endif
+
+%check
+%if %{with unit_tests}
+pushd build
+ctest
+popd
+%endif
 
